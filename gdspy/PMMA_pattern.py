@@ -177,22 +177,40 @@ main = lib.new_cell('main')
 # Define pattern cells
 hexagon_cell = lib.new_cell('hexagon')
 
-# Width of CFO (dy) = 0.1 um = 100 nm
-rectangle_cell_0point1_dy = lib.new_cell('rectangle_0point1_dy')
-rotated_rectangle_0point1_dy_cell = lib.new_cell('rotated_rectangular_0point1_dy')
-rotated_rectangle_0point1_dy_cell_1 = lib.new_cell('rotated_rectangular_0point1_dy_1')
-straight_line_0point1_dy_cell = lib.new_cell('straight_lines_0point1_dy')
-rotated_straight_line_0point1_dy_cell = lib.new_cell('rotated_straight_lines_0point1_dy')
-rotated_straight_line_0point1_dy_cell_1 = lib.new_cell('rotated_straight_lines_0point1_dy_1')
+# CFO = 0.05 um, BFO = 0.05 um
+rect_1 = lib.new_cell('rect_1')
+rect_mat_1 = lib.new_cell('rect_mat_1')
+rect_mat_1a = lib.new_cell('rect_mat_1a')
 
+# CFO = 0.05 um, BFO = 0.1 um
+rect_2 = lib.new_cell('rect_2')
+rect_mat_2 = lib.new_cell('rect_mat_2')
+rect_mat_2a = lib.new_cell('rect_mat_2a')
 
-# Width of CFO (dy) = 0.2 um = 200 nm
-rectangle_cell_0point2_dy = lib.new_cell('rectangle_0point2_dy')
-rotated_rectangle_0point2_dy_cell = lib.new_cell('rotated_rectangular_0point2_dy')
-rotated_rectangle_0point2_dy_cell_1 = lib.new_cell('rotated_rectangular_0point2_dy_1')
-straight_line_0point2_dy_cell = lib.new_cell('straight_lines_0point2_dy')
-rotated_straight_line_0point2_dy_cell = lib.new_cell('rotated_straight_lines_0point2_dy')
-rotated_straight_line_0point2_dy_cell_1 = lib.new_cell('rotated_straight_lines_0point2_dy_1')
+# CFO = 0.05 um, BFO = 0.15 um 
+rect_3 = lib.new_cell('rect_3')
+rect_mat_3 = lib.new_cell('rect_mat_3')
+rect_mat_3a = lib.new_cell('rect_mat_3a')
+
+# CFO = 0.1 um, BFO = 0.1 um
+rect_4 = lib.new_cell('rect_4')
+rect_mat_4 = lib.new_cell('rect_mat_4')
+rect_mat_4a = lib.new_cell('rect_mat_4a')
+
+# CFO = 0.1 um, BFO = 0.15 um
+rect_5 = lib.new_cell('rect_5')
+rect_mat_5 = lib.new_cell('rect_mat_5')
+rect_mat_5a = lib.new_cell('rect_mat_5a')
+
+# CFO = 0.1 um, BFO = 0.2 um
+rect_6 = lib.new_cell('rect_6')
+rect_mat_6 = lib.new_cell('rect_mat_6')
+rect_mat_6a = lib.new_cell('rect_mat_6a')
+
+# CFO = 0.1 um, BFO = 0.25 um
+rect_7 = lib.new_cell('rect_7')
+rect_mat_7 = lib.new_cell('rect_mat_7')
+rect_mat_7a = lib.new_cell('rect_mat_7a')
 
 ###############################
 # CREATE PATTERNS
@@ -203,12 +221,12 @@ hexagon_array(center_x_coor = 0, center_y_coor = -60,
               number_of_loops = 40, 
               radius = 0.5, trench_width = 0.05, trench_width_increment = 0.02, 
               dx = 40, dy = 0, 
-              number_of_patterns_x = 10, 
+              number_of_patterns_x = 12, 
               pattern = pattern_temp, 
               cell = hexagon_cell)
 hexagon_ref = gdspy.CellReference(hexagon_cell, (0, 0))
 
-### BFO width = 0.05um; CFO dy= 0.05um
+### CFO = 0.05 um, BFO = 0.05 um ###
 
 # Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
 
@@ -216,8 +234,8 @@ rectangle_pattern(x_top = 0, y_top = 0,
                   length = 15, width = 0.05, 
                   dx = 0, dy = 0.05, 
                   num_horizontal_patterns = 1, num_vertical_array = 20, 
-                  main_cell = rectangle_cell_0point1_dy)
-rectangular_pattern_0point1_dy_matrix = rotation_matrix(rotated_rectangle_0point1_dy_cell, rectangle_cell_0point1_dy, 
+                  main_cell = rect_1)
+rect_mat_cell_1 = rotation_matrix(main_cell = rect_mat_1, pattern_cell = rect_1, 
                        x_coor = 0, y_coor = 0, 
                        magnification_value = 1, 
                        start_angle = 0, 
@@ -225,60 +243,90 @@ rectangular_pattern_0point1_dy_matrix = rotation_matrix(rotated_rectangle_0point
                        rotation_angle_increment = 15, 
                        dx = 20, 
                        dy = 20, 
-                       num_of_horizontal_copies = 3)
+                       num_of_horizontal_copies = 2)
 
 # Rectangular pattern with rotation angles 35.27 and 54.74
 
-rectangular_pattern_0point1_dy_35p27_angle = horizontal_rotated_copy(main_cell = rotated_rectangle_0point1_dy_cell_1, pattern_cell = rectangle_cell_0point1_dy, 
+rect_mat_cell_1_35p27 = horizontal_rotated_copy(main_cell = rect_mat_1a, pattern_cell = rect_1, 
                                                     x_coor = 0, y_coor = -20, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 35.27, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
-rectangular_pattern_0point1_dy_54p74_angle = horizontal_rotated_copy(main_cell = rotated_rectangle_0point1_dy_cell_1, pattern_cell = rectangle_cell_0point1_dy, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_1_54p74 = horizontal_rotated_copy(main_cell = rect_mat_1a, pattern_cell = rect_1, 
                                                     x_coor = 0, y_coor = -40, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 54.74, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
+                                                    num_of_horizontal_copies = 2)
 
-### BFO width = 0.1um; CFO dy= 0.05um
+### CFO = 0.05 um, BFO = 0.1 um ###
 
-# Straight line patterns
 rectangle_pattern(x_top = 0, y_top = 0, 
                   length = 15, width = 0.1, 
                   dx = 0, dy = 0.05, 
                   num_horizontal_patterns = 1, num_vertical_array = 20, 
-                  main_cell = straight_line_0point1_dy_cell)
-
-straight_line_pattern_0point1_dy_matrix = rotation_matrix(rotated_straight_line_0point1_dy_cell, straight_line_0point1_dy_cell, 
-                       x_coor = 100, y_coor = 0, 
+                  main_cell = rect_2)
+rect_mat_cell_2 = rotation_matrix(main_cell = rect_mat_2, pattern_cell = rect_2, 
+                       x_coor = 70, y_coor = 0, 
                        magnification_value = 1, 
                        start_angle = 0, 
                        final_angle = 90, 
                        rotation_angle_increment = 15, 
                        dx = 20, 
                        dy = 20, 
-                       num_of_horizontal_copies = 3)
+                       num_of_horizontal_copies = 2)
 
-# Straight line patterns with the rotation angles of 35.27 and 54.74
+# Rectangular pattern with rotation angles 35.27 and 54.74
 
-straight_line_pattern_0point1_dy_35p27 = horizontal_rotated_copy(main_cell = rotated_straight_line_0point1_dy_cell_1, pattern_cell = straight_line_0point1_dy_cell, 
-                                                    x_coor = 100, y_coor = -20, 
+rect_mat_cell_2_35p27 = horizontal_rotated_copy(main_cell = rect_mat_2a, pattern_cell = rect_2, 
+                                                    x_coor = 70, y_coor = -20, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 35.27, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
-
-straight_line_pattern_0point1_dy_54p74 = horizontal_rotated_copy(main_cell = rotated_straight_line_0point1_dy_cell_1, pattern_cell = straight_line_0point1_dy_cell, 
-                                                    x_coor = 100, y_coor = -40, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_2_54p74 = horizontal_rotated_copy(main_cell = rect_mat_2a, pattern_cell = rect_2, 
+                                                    x_coor = 70, y_coor = -40, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 54.74, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
+                                                    num_of_horizontal_copies = 2)
 
+### CFO = 0.05 um, BFO = 0.15 um ###
 
-### BFO width = 0.1um; CFO dy= 0.1um
+# Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
+
+rectangle_pattern(x_top = 0, y_top = 0, 
+                  length = 15, width = 0.15, 
+                  dx = 0, dy = 0.05, 
+                  num_horizontal_patterns = 1, num_vertical_array = 20, 
+                  main_cell = rect_3)
+rect_mat_cell_3 = rotation_matrix(main_cell = rect_mat_3, pattern_cell = rect_3, 
+                       x_coor = 140, y_coor = 0, 
+                       magnification_value = 1, 
+                       start_angle = 0, 
+                       final_angle = 90, 
+                       rotation_angle_increment = 15, 
+                       dx = 20, 
+                       dy = 20, 
+                       num_of_horizontal_copies = 2)
+
+# Rectangular pattern with rotation angles 35.27 and 54.74
+
+rect_mat_cell_3_35p27 = horizontal_rotated_copy(main_cell = rect_mat_3a, pattern_cell = rect_3, 
+                                                    x_coor = 140, y_coor = -20, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 35.27, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_3_54p74 = horizontal_rotated_copy(main_cell = rect_mat_3a, pattern_cell = rect_3, 
+                                                    x_coor = 140, y_coor = -40, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 54.74, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+
+### CFO = 0.1 um, BFO = 0.1 um ###
 
 # Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
 
@@ -286,66 +334,135 @@ rectangle_pattern(x_top = 0, y_top = 0,
                   length = 15, width = 0.1, 
                   dx = 0, dy = 0.1, 
                   num_horizontal_patterns = 1, num_vertical_array = 20, 
-                  main_cell = rectangle_cell_0point2_dy)
-rectangular_pattern_0point2_dy_matrix = rotation_matrix(rotated_rectangle_0point2_dy_cell, rectangle_cell_0point2_dy, 
-                       x_coor = 200, y_coor = 0, 
+                  main_cell = rect_4)
+rect_mat_cell_4 = rotation_matrix(main_cell = rect_mat_4, pattern_cell = rect_4, 
+                       x_coor = 210, y_coor = 0, 
                        magnification_value = 1, 
                        start_angle = 0, 
                        final_angle = 90, 
                        rotation_angle_increment = 15, 
                        dx = 20, 
                        dy = 20, 
-                       num_of_horizontal_copies = 3)
+                       num_of_horizontal_copies = 2)
 
 # Rectangular pattern with rotation angles 35.27 and 54.74
 
-rectangular_pattern_0point2_dy_35p27_angle = horizontal_rotated_copy(main_cell = rotated_rectangle_0point2_dy_cell_1, pattern_cell = rectangle_cell_0point2_dy, 
-                                                    x_coor = 200, y_coor = -20, 
+rect_mat_cell_4_35p27 = horizontal_rotated_copy(main_cell = rect_mat_4a, pattern_cell = rect_4, 
+                                                    x_coor = 210, y_coor = -20, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 35.27, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
-rectangular_pattern_0point2_dy_54p74_angle = horizontal_rotated_copy(main_cell = rotated_rectangle_0point2_dy_cell_1, pattern_cell = rectangle_cell_0point2_dy, 
-                                                    x_coor = 200, y_coor = -40, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_4_54p74 = horizontal_rotated_copy(main_cell = rect_mat_4a, pattern_cell = rect_4, 
+                                                    x_coor = 210, y_coor = -40, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 54.74, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
+                                                    num_of_horizontal_copies = 2)
 
-### BFO width = 0.15um; CFO dy= 0.1um
+### CFO = 0.1 um, BFO = 0.15 um ###
 
-# Straight line patterns
+# Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
+
 rectangle_pattern(x_top = 0, y_top = 0, 
                   length = 15, width = 0.15, 
                   dx = 0, dy = 0.1, 
                   num_horizontal_patterns = 1, num_vertical_array = 20, 
-                  main_cell = straight_line_0point2_dy_cell)
-
-straight_line_pattern_0point2_dy_matrix = rotation_matrix(rotated_straight_line_0point2_dy_cell, straight_line_0point2_dy_cell, 
-                       x_coor = 300, y_coor = 0, 
+                  main_cell = rect_5)
+rect_mat_cell_5 = rotation_matrix(main_cell = rect_mat_5, pattern_cell = rect_5, 
+                       x_coor = 280, y_coor = 0, 
                        magnification_value = 1, 
                        start_angle = 0, 
                        final_angle = 90, 
                        rotation_angle_increment = 15, 
                        dx = 20, 
                        dy = 20, 
-                       num_of_horizontal_copies = 3)
+                       num_of_horizontal_copies = 2)
 
-# Straight line patterns with the rotation angles of 35.27 and 54.74
+# Rectangular pattern with rotation angles 35.27 and 54.74
 
-straight_line_pattern_0point2_dy_35p27 = horizontal_rotated_copy(main_cell = rotated_straight_line_0point2_dy_cell_1, pattern_cell = straight_line_0point2_dy_cell, 
-                                                    x_coor = 300, y_coor = -20, 
+rect_mat_cell_5_35p27 = horizontal_rotated_copy(main_cell = rect_mat_5a, pattern_cell = rect_5, 
+                                                    x_coor = 280, y_coor = -20, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 35.27, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
-
-straight_line_pattern_0point2_dy_54p74 = horizontal_rotated_copy(main_cell = rotated_straight_line_0point2_dy_cell_1, pattern_cell = straight_line_0point2_dy_cell, 
-                                                    x_coor = 300, y_coor = -40, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_5_54p74 = horizontal_rotated_copy(main_cell = rect_mat_5a, pattern_cell = rect_5, 
+                                                    x_coor = 280, y_coor = -40, 
                                                     magnification_value = 1, 
                                                     rotation_angle = 54.74, 
                                                     dx = 20, 
-                                                    num_of_horizontal_copies = 3)
+                                                    num_of_horizontal_copies = 2)
+
+### CFO = 0.1 um, BFO = 0.2 um ###
+
+# Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
+
+rectangle_pattern(x_top = 0, y_top = 0, 
+                  length = 15, width = 0.2, 
+                  dx = 0, dy = 0.1, 
+                  num_horizontal_patterns = 1, num_vertical_array = 20, 
+                  main_cell = rect_6)
+rect_mat_cell_6 = rotation_matrix(main_cell = rect_mat_6, pattern_cell = rect_6, 
+                       x_coor = 350, y_coor = 0, 
+                       magnification_value = 1, 
+                       start_angle = 0, 
+                       final_angle = 90, 
+                       rotation_angle_increment = 15, 
+                       dx = 20, 
+                       dy = 20, 
+                       num_of_horizontal_copies = 2)
+
+# Rectangular pattern with rotation angles 35.27 and 54.74
+
+rect_mat_cell_6_35p27 = horizontal_rotated_copy(main_cell = rect_mat_6a, pattern_cell = rect_6, 
+                                                    x_coor = 350, y_coor = -20, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 35.27, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_6_54p74 = horizontal_rotated_copy(main_cell = rect_mat_6a, pattern_cell = rect_6, 
+                                                    x_coor = 350, y_coor = -40, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 54.74, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+
+### CFO = 0.1 um, BFO = 0.25 um ###
+
+# Rectangular pattern matrix, rotation angles from 0 to 90 degree with 15 degree increment
+
+rectangle_pattern(x_top = 0, y_top = 0, 
+                  length = 15, width = 0.25, 
+                  dx = 0, dy = 0.1, 
+                  num_horizontal_patterns = 1, num_vertical_array = 20, 
+                  main_cell = rect_7)
+rect_mat_cell_7 = rotation_matrix(main_cell = rect_mat_7, pattern_cell = rect_7, 
+                       x_coor = 420, y_coor = 0, 
+                       magnification_value = 1, 
+                       start_angle = 0, 
+                       final_angle = 90, 
+                       rotation_angle_increment = 15, 
+                       dx = 20, 
+                       dy = 20, 
+                       num_of_horizontal_copies = 2)
+
+# Rectangular pattern with rotation angles 35.27 and 54.74
+
+rect_mat_cell_7_35p27 = horizontal_rotated_copy(main_cell = rect_mat_7a, pattern_cell = rect_7, 
+                                                    x_coor = 420, y_coor = -20, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 35.27, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+rect_mat_cell_7_54p74 = horizontal_rotated_copy(main_cell = rect_mat_7a, pattern_cell = rect_7, 
+                                                    x_coor = 420, y_coor = -40, 
+                                                    magnification_value = 1, 
+                                                    rotation_angle = 54.74, 
+                                                    dx = 20, 
+                                                    num_of_horizontal_copies = 2)
+
+
 
 # Dot patterns with the spacing 0.05
 rectangular_substrate_pattern = gdspy.Rectangle((160, -70), (170, -80))
@@ -405,19 +522,33 @@ new_dot_pattern_6 = horizontal_dot_matrix(x_coor = 167, y_coor = -79,
 # Hexagon
 main.add(hexagon_ref)
 
-### BFO width = 0.05um; CFO dy= 0.05um
-main.add(rectangular_pattern_0point1_dy_matrix)
-main.add(rotated_rectangle_0point1_dy_cell_1)
-### BFO width = 0.1um; CFO dy= 0.05um
-main.add(straight_line_pattern_0point1_dy_matrix)
-main.add(rotated_straight_line_0point1_dy_cell_1)
+### CFO = 0.05 um, BFO = 0.05 um ###
+main.add(rect_mat_cell_1)
+main.add(rect_mat_1a)
 
-### BFO width = 0.1um; CFO dy= 0.1um
-main.add(rectangular_pattern_0point2_dy_matrix)
-main.add(rotated_rectangle_0point2_dy_cell_1)
-### BFO width = 0.15um; CFO dy= 0.1um
-main.add(straight_line_pattern_0point2_dy_matrix)
-main.add(rotated_straight_line_0point2_dy_cell_1)
+### CFO = 0.05 um, BFO = 0.1 um ###
+main.add(rect_mat_cell_2)
+main.add(rect_mat_2a)
+
+### CFO = 0.05 um, BFO = 0.15 um ###
+main.add(rect_mat_cell_3)
+main.add(rect_mat_3a)
+
+### CFO = 0.1 um, BFO = 0.1 um ###
+main.add(rect_mat_cell_4)
+main.add(rect_mat_4a)
+
+### CFO = 0.1 um, BFO = 0.15 um ###
+main.add(rect_mat_cell_5)
+main.add(rect_mat_5a)
+
+### CFO = 0.1 um, BFO = 0.2 um ###
+main.add(rect_mat_cell_6)
+main.add(rect_mat_6a)
+
+### CFO = 0.1 um, BFO = 0.25 um ###
+main.add(rect_mat_cell_7)
+main.add(rect_mat_7a)
 
 # Dot pattern
 main.add(new_dot_pattern_6)
